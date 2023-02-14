@@ -1,0 +1,58 @@
+.leftside {
+  flex: 1.5;
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  background: linear-gradient(326.9deg, #13132b 5.79%, #135e87 283.21%);
+  box-shadow: 18px 4px 35px rgba(0, 0, 0, 0.02);
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .container {
+    padding: 20px;
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .user {
+        display: block;
+
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          object-fit: cover;
+          justify-content: center;
+          margin: auto;
+          display: block;
+        }
+        span {
+          color: white;
+          justify-content: center;
+          align-items: center;
+          display: block;
+        }
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        img {
+          width: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        span {
+          color: white;
+        }
+      }
+    }
+  }
+}
