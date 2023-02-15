@@ -14,7 +14,7 @@ const Register = () => {
 
   const [form, setForm] = useState(logins);
 
-  const { email, username, password, registrationErrors } = form;
+  const { email, username, password } = form;
 
   const handleSubmit = (e) => {
     axios
