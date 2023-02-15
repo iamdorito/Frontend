@@ -1,12 +1,10 @@
 import "./posts.scss";
 import { useState, useEffect } from "react";
 import Post from "../Post/Post";
-import user1 from "../../assets/unrevealed-nft-3.jpg";
-import user2 from "../../assets/unrevealed-nft-2.jpg";
+
 import defaultPic from "../../assets/default-user.png";
-import AttachmentOutlinedIcon from "@mui/icons-material/AttachmentOutlined";
+
 import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
-import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 
 const Posts = () => {
   const initialState = {
@@ -51,6 +49,12 @@ const Posts = () => {
       });
   };
 
+  const handleDelete = (id) => {
+    const newData = posts.filter((post) => post.id !== id);
+    console.log(id);
+    return setPosts(newData);
+  };
+
   return (
     <div className="posts">
       <div className="write">
@@ -67,7 +71,12 @@ const Posts = () => {
         <button onClick={handleAddPost}>Post</button>
       </div>
       {posts.map((post) => (
-        <Post post={post} key={post.id} />
+        <Post
+          post={post}
+          key={post.id}
+          onDeletePost={handleDelete}
+          onUpdateChange={setPosts}
+        />
       ))}
     </div>
   );

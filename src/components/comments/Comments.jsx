@@ -1,8 +1,10 @@
 import "./comments.scss";
-
+import { useState } from "react";
 import defaultPic from "../../assets/default-user.png";
 
 const Comments = () => {
+  // const [comments, setComments] = useState();
+
   const comments = [
     {
       id: 1,
@@ -29,7 +31,7 @@ const Comments = () => {
         <button>Send</button>
       </div>
       {comments.map((comment) => (
-        <div className="comment">
+        <div className="comment" key={comment.id}>
           <img src={comment.profilePicture} alt="" />
           <div className="info">
             <span>{comment.name}</span>

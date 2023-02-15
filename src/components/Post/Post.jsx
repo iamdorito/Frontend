@@ -10,7 +10,7 @@ import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import Comments from "../comments/Comments";
 
-const Post = ({ post }) => {
+const Post = ({ post, onDeletePost, onUpdateChange }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 
@@ -20,6 +20,18 @@ const Post = ({ post }) => {
 
   const handleMoreClick = () => {
     setMoreOpen(!moreOpen);
+  };
+
+  const handleDeleteClick = () => {
+    const config = {
+      method: "DELETE",
+    };
+
+    fetch(`http://localhost:3000/posts/${post.id}`, config)
+      .then((resp) => resp.json())
+      .then(() => {
+        onDeletePost(post.id);
+      });
   };
 
   const liked = false;
@@ -37,7 +49,7 @@ const Post = ({ post }) => {
               >
                 <span className="name">{post.id}</span>
               </Link>
-              <span className="date">{post.created_at}</span>
+              <span className="date">{post.created_at.slice()}</span>
             </div>
           </div>
           <div className="items">
@@ -45,7 +57,7 @@ const Post = ({ post }) => {
             {moreOpen && (
               <div className="pop-ups">
                 <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={handleDeleteClick}>Delete</button>
               </div>
             )}
           </div>

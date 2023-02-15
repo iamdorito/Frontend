@@ -1,37 +1,29 @@
 // import "./latest.scss";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 
 const Latest = () => {
-  const latest = [
-    {
-      id: 1,
-      name: "Medium",
-      img: "https://images.pexels.com/photos/159652/table-food-book-newspaper-159652.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 2,
-      name: "The New York Times",
-      img: "https://images.pexels.com/photos/3944377/pexels-photo-3944377.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
-    },
-    {
-      id: 3,
-      name: "Washington Post",
-      img: "https://images.pexels.com/photos/3886870/pexels-photo-3886870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 4,
-      name: "CoinDesk",
-      img: "https://images.pexels.com/photos/7682249/pexels-photo-7682249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-  ];
+  const [latestNews, setLatestNews] = useState([]);
+
+  let newsIndex = 0;
+
+  useEffect(() => {
+    fetch(
+      "https://newsapi.org/v2/everything?q=football&apiKey=bf9d51a947924d10bbfb46d3548e0be8"
+    )
+      .then((resp) => resp.json())
+      .then((data) => setLatestNews(data.articles));
+  }, []);
+
+  const filteredNews = latestNews.slice(newsIndex, newsIndex + 4);
 
   return (
     <LatestDiv>
-      {latest.map((news) => {
+      {filteredNews.map((news) => {
         return (
           <NewsDiv key={news.id}>
-            <img src={news.img} alt="" />
-            <ArticleName>{news.name}</ArticleName>
+            <img src={news.urlToImage} alt="" />
+            <ArticleName>{news.title}</ArticleName>
           </NewsDiv>
         );
       })}
