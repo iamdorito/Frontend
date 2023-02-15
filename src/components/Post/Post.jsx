@@ -1,6 +1,7 @@
 import "./post.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import user2 from "../../assets/unrevealed-nft-2.jpg";
 
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -11,9 +12,14 @@ import Comments from "../comments/Comments";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
-  const handleClick = () => {
+  const handleCommentClick = () => {
     setCommentOpen(!commentOpen);
+  };
+
+  const handleMoreClick = () => {
+    setMoreOpen(!moreOpen);
   };
 
   const liked = false;
@@ -23,29 +29,37 @@ const Post = ({ post }) => {
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={post.profilePic} alt={post.profilePic} />
+            <img src={user2} alt={user2} />
             <div className="details">
               <Link
-                to={`/profile/${post.userId}`}
+                to={`/profile/1`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className="name">{post.name}</span>
+                <span className="name">{post.id}</span>
               </Link>
-              <span className="date">1 min ago</span>
+              <span className="date">{post.created_at}</span>
             </div>
           </div>
-          <MoreHorizOutlinedIcon />
+          <div className="items">
+            <MoreHorizOutlinedIcon onClick={handleMoreClick} />
+            {moreOpen && (
+              <div className="pop-ups">
+                <button>Edit</button>
+                <button>Delete</button>
+              </div>
+            )}
+          </div>
         </div>
         <div className="content">
           <p>{post.desc}</p>
-          <img src={post.img} alt="" />
+          <img src={post.image} alt="" />
         </div>
         <div className="info">
           <div className="item">
             {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
             25 likes
           </div>
-          <div className="item" onClick={handleClick}>
+          <div className="item" onClick={handleCommentClick}>
             <ForumOutlinedIcon />
             25 comments
           </div>

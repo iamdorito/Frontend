@@ -13,6 +13,7 @@
 
   .container {
     padding: 20px;
+
     .menu {
       display: flex;
       flex-direction: column;
@@ -20,6 +21,7 @@
 
       .user {
         display: block;
+        position: relative;
 
         img {
           width: 100px;
@@ -31,18 +33,27 @@
           display: block;
         }
         span {
+          width: 100%;
+          position: absolute;
+          left: 50px;
           color: white;
           justify-content: center;
           align-items: center;
-          display: block;
         }
       }
 
       .item {
+        margin-top: 20px;
         display: flex;
         align-items: center;
         gap: 10px;
         color: white;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
         img {
           width: 30px;
           border-radius: 50%;

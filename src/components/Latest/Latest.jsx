@@ -1,4 +1,5 @@
-import "./latest.scss";
+// import "./latest.scss";
+import styled from "styled-components";
 
 const Latest = () => {
   const latest = [
@@ -25,17 +26,46 @@ const Latest = () => {
   ];
 
   return (
-    <div className="latest">
+    <LatestDiv>
       {latest.map((news) => {
         return (
-          <div className="news" key={news.id}>
+          <NewsDiv key={news.id}>
             <img src={news.img} alt="" />
-            <span>{news.name}</span>
-          </div>
+            <ArticleName>{news.name}</ArticleName>
+          </NewsDiv>
         );
       })}
-    </div>
+    </LatestDiv>
   );
 };
+
+const LatestDiv = styled.div`
+  display: flex;
+  gap: 10px;
+  height: 250px;
+  margin-bottom: 30px;
+  background-color: black;
+  padding: 10px;
+`;
+
+const NewsDiv = styled.div`
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const ArticleName = styled.span`
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-weight: 500;
+`;
 
 export default Latest;

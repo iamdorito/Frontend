@@ -33,11 +33,21 @@
 
     button {
       border: none;
-      background-color: #5271ff;
+      background: linear-gradient(326.9deg, #393984 5.79%, #135e87 283.21%);
       color: white;
       padding: 10px;
       cursor: pointer;
       border-radius: 3px;
+      &:hover {
+        background-image: linear-gradient(
+          to right,
+          #25aae1,
+          #40e495,
+          #30dd8a,
+          #2bb673
+        );
+        box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+      }
     }
     img {
       width: 40px;

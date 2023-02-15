@@ -1,14 +1,18 @@
-import "./Home.scss";
 import Latest from "../../components/Latest/Latest";
 import Posts from "../../components/Posts/Posts";
+import styled from "styled-components";
 
 const Home = () => {
   return (
-    <div className="home">
+    <HomeStyles>
       <Latest />
       <Posts />
-    </div>
+    </HomeStyles>
   );
 };
+
+const HomeStyles = styled.div`
+  background-color: black;
+`;
 
 export default Home;
