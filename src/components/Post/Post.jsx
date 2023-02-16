@@ -60,7 +60,10 @@ const Post = ({
       body: JSON.stringify({ desc: newPost }),
     };
 
-    fetch(`http://localhost:3000/posts/${post.id}`, config);
+    fetch(`http://localhost:3000/posts/${post.id}`, config)
+      .then((response) => response.json())
+      .then((updatedPost) => onUpdateChange(post.id, updatedPost));
+    setIsEditMode(!isEditMode);
   };
 
   const liked = false;

@@ -5,7 +5,6 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const [inputs, setInputs] = useState({ username: "", password: "" });
-  const [error, setError] = useState("");
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -20,7 +19,7 @@ const Login = () => {
       await login(inputs);
       navigate("/");
     } catch (err) {
-      setError("Wrong user or password", err);
+      alert("Wrong user or password", err);
     }
   };
 
@@ -43,7 +42,6 @@ const Login = () => {
             onChange={handleInputChange}
             required
           />
-          {error}
           <button>Login</button>
           <span>
             Don't have an account?{" "}

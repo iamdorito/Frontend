@@ -1,7 +1,7 @@
 import React from "react";
 import nfticon2 from "../../assets/unrevealed-nft-3.jpg";
 
-const Users = ({ User, name }) => {
+const Users = ({ name }) => {
   return (
     <div className="user">
       <div className="userInfo">

@@ -7,15 +7,15 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = async (inputs) => {
+  const login = (data) => {
     const configObj = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(inputs),
+      body: JSON.stringify(data),
     };
-    await fetch("http://localhost:3000/login", configObj).then((resp) => {
+    fetch("http://localhost:3000/login", configObj).then((resp) => {
       if (resp.ok) {
         resp.json().then((user) => {
           setCurrentUser(user);

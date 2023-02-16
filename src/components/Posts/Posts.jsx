@@ -33,8 +33,14 @@ const Posts = () => {
     return setPosts(newData);
   };
 
-  const handleUpdatePost = (id) => {
-    const newData = posts.map((post) => post.id === id);
+  const handleUpdatePost = (id, updatedPost) => {
+    const newData = posts.map((post) => {
+      if (post.id === id) {
+        return updatedPost;
+      } else {
+        return post;
+      }
+    });
     return setPosts(newData);
   };
 
@@ -64,6 +70,7 @@ const Posts = () => {
         <img src={defaultPic} alt="" />
         <input
           type="text"
+          name="post"
           placeholder="What's on your mind?"
           required
           onChange={handleInputChange}
