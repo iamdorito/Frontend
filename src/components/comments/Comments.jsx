@@ -1,41 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import defaultPic from "../../assets/default-user.png";
 import styled from "styled-components";
 
 const Comments = () => {
   // const [comments, setComments] = useState();
+  const [commentsData, setCommentsData] = useState([])
+  const [commentInput, setCommentInput] = useState({
+    description: ""
+  })
 
-  const comments = [
-    {
-      id: 1,
-      desc: "Yo, I agree but but but but but but but but",
-      name: "Reese Marshal",
-      userId: 1,
-      profilePicture:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 2,
-      desc: "This doesn't make sense! It's not working and I'm always getting an error",
-      name: "Aura Gomez",
-      userId: 2,
-      profilePicture:
-        "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    },
-  ];
+  console.log(commentsData)
+ 
+  useEffect(() => {
+    fetch("http://localhost:3000/comments")
+    .then(response => response.json())
+    .then(postData => setCommentsData(postData))
+  }, [])
+
+
+  function createNewComment(event){
+    fetch('http://localhost:3000/comments', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(commentInput)
+    })
+    .then(response => response.json())
+    .then(newComment => setCommentsData([...commentsData, newComment]))
+  }
+
+  function handleChangeForComment(event){
+    setCommentInput({...commentInput, [event.target.name]: event.target.value})
+  }
+
+
   return (
     <CommentsDiv>
       <WriteDiv>
         <img src={defaultPic} alt="" />
-        <input type="text" placeholder="write a comment" />
-        <button>Send</button>
+        <input onChange={handleChangeForComment}name="description" type="text" placeholder="write a comment" />
+        <button onClick={createNewComment}>Send</button>
       </WriteDiv>
-      {comments.map((comment) => (
+      {commentsData.map((comment) => (
         <CommentDiv key={comment.id}>
-          <img src={comment.profilePicture} alt="" />
+          <img src={defaultPic} alt="" />
           <InfoDiv>
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
+            <span>Random Name</span>
+            <p>{comment.description}</p>
           </InfoDiv>
           <Date>1 hour ago</Date>
         </CommentDiv>

@@ -49,7 +49,7 @@ const Post = ({ post, onDeletePost, onUpdateChange }) => {
               >
                 <span className="name">{post.id}</span>
               </Link>
-              <span className="date">{post.created_at.slice()}</span>
+              <span className="date">{post.created_at}</span>
             </div>
           </div>
           <div className="items">

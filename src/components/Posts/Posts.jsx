@@ -42,7 +42,6 @@ const Posts = () => {
       .then((resp) => resp.json())
       .then((post) => {
         AddPost(post);
-        setNewPost(initialState);
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +50,6 @@ const Posts = () => {
 
   const handleDelete = (id) => {
     const newData = posts.filter((post) => post.id !== id);
-    console.log(id);
     return setPosts(newData);
   };
 
