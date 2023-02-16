@@ -28,6 +28,16 @@ const Posts = () => {
     setPosts((posts) => [...posts, newPost]);
   };
 
+  const handleDeletePost = (id) => {
+    const newData = posts.filter((post) => post.id !== id);
+    return setPosts(newData);
+  };
+
+  const handleUpdatePost = (id) => {
+    const newData = posts.map((post) => post.id === id);
+    return setPosts(newData);
+  };
+
   const handleAddPost = (e) => {
     e.preventDefault();
     const configObj = {
@@ -42,17 +52,10 @@ const Posts = () => {
       .then((resp) => resp.json())
       .then((post) => {
         AddPost(post);
-        setNewPost(initialState);
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const handleDelete = (id) => {
-    const newData = posts.filter((post) => post.id !== id);
-    console.log(id);
-    return setPosts(newData);
   };
 
   return (
@@ -74,8 +77,10 @@ const Posts = () => {
         <Post
           post={post}
           key={post.id}
-          onDeletePost={handleDelete}
-          onUpdateChange={setPosts}
+          onDeletePost={handleDeletePost}
+          onUpdateChange={handleUpdatePost}
+          onInputChange={handleInputChange}
+          newPost={newPost}
         />
       ))}
     </div>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import defaultPic from "../../assets/default-user.png";
 import styled from "styled-components";
 

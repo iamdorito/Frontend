@@ -16,12 +16,13 @@ const Latest = () => {
   }, []);
 
   const filteredNews = latestNews.slice(newsIndex, newsIndex + 4);
+  console.log(filteredNews);
 
   return (
     <LatestDiv>
       {filteredNews.map((news) => {
         return (
-          <NewsDiv key={news.id}>
+          <NewsDiv key={news.title}>
             <img src={news.urlToImage} alt="" />
             <ArticleName>{news.title}</ArticleName>
           </NewsDiv>

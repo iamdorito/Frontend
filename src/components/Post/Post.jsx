@@ -2,6 +2,7 @@ import "./post.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import user2 from "../../assets/unrevealed-nft-2.jpg";
+import Modal from "../Modal/Modal";
 
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -10,9 +11,16 @@ import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import Comments from "../comments/Comments";
 
-const Post = ({ post, onDeletePost, onUpdateChange }) => {
+const Post = ({
+  post,
+  onDeletePost,
+  onUpdateChange,
+  onInputChange,
+  newPost,
+}) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const handleCommentClick = () => {
     setCommentOpen(!commentOpen);
@@ -20,6 +28,10 @@ const Post = ({ post, onDeletePost, onUpdateChange }) => {
 
   const handleMoreClick = () => {
     setMoreOpen(!moreOpen);
+  };
+
+  const handleEditMode = () => {
+    setIsEditMode(!isEditMode);
   };
 
   const handleDeleteClick = () => {
@@ -31,6 +43,23 @@ const Post = ({ post, onDeletePost, onUpdateChange }) => {
       .then((resp) => resp.json())
       .then(() => {
         onDeletePost(post.id);
+      });
+  };
+
+  const handleChangeDescription = () => {
+    const config = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ desc: newPost }),
+    };
+
+    fetch(`http://localhost:3000/posts/${post.id}`, config)
+      .then((resp) => resp.json())
+      .then(() => {
+        onUpdateChange(post.id);
       });
   };
 
@@ -56,7 +85,7 @@ const Post = ({ post, onDeletePost, onUpdateChange }) => {
             <MoreHorizOutlinedIcon onClick={handleMoreClick} />
             {moreOpen && (
               <div className="pop-ups">
-                <button>Edit</button>
+                <button onClick={handleEditMode}>Edit</button>
                 <button onClick={handleDeleteClick}>Delete</button>
               </div>
             )}
@@ -64,6 +93,7 @@ const Post = ({ post, onDeletePost, onUpdateChange }) => {
         </div>
         <div className="content">
           <p>{post.desc}</p>
+
           <img src={post.image} alt="" />
         </div>
         <div className="info">
@@ -82,6 +112,14 @@ const Post = ({ post, onDeletePost, onUpdateChange }) => {
         </div>
         {commentOpen && <Comments />}
       </div>
+      <Modal
+        show={isEditMode}
+        post={post}
+        onClick={handleEditMode}
+        onChange={handleChangeDescription}
+        onInputChange={onInputChange}
+        newPost={newPost}
+      />
     </div>
   );
 };
