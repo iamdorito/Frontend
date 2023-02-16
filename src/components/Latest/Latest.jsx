@@ -16,7 +16,6 @@ const Latest = () => {
   }, []);
 
   const filteredNews = latestNews.slice(newsIndex, newsIndex + 4);
-  console.log(filteredNews);
 
   return (
     <LatestDiv>

@@ -6,8 +6,18 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/Posts/Posts";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Profile = () => {
+  const { currentUser } = useContext(AuthContext);
+
+  const [toggleFollow, setToggleFollow] = useState(false);
+
+  const handeFollowButton = () => {
+    setToggleFollow(!toggleFollow);
+  };
+
   return (
     <div className="profile">
       <div className="images">
@@ -39,13 +49,19 @@ const Profile = () => {
             </a>
           </div>
           <div className="center">
-            <span>Jabronie</span>
+            <span>{currentUser.username}</span>
             <div className="info">
               <div className="item">
-                <span>@Jabronie</span>
+                <span>{`@${currentUser.username}`}</span>
               </div>
             </div>
-            <button>Follow</button>
+            <div onClick={handeFollowButton}>
+              {toggleFollow ? (
+                <button>Following</button>
+              ) : (
+                <button>Follow</button>
+              )}
+            </div>
           </div>
           <div className="right">
             <EmailOutlinedIcon />

@@ -10,6 +10,8 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import Comments from "../comments/Comments";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Post = ({
   post,
@@ -21,6 +23,8 @@ const Post = ({
   const [commentOpen, setCommentOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const { currentUser } = useContext(AuthContext);
 
   const handleCommentClick = () => {
     setCommentOpen(!commentOpen);
@@ -56,11 +60,7 @@ const Post = ({
       body: JSON.stringify({ desc: newPost }),
     };
 
-    fetch(`http://localhost:3000/posts/${post.id}`, config)
-      .then((resp) => resp.json())
-      .then(() => {
-        onUpdateChange(post.id);
-      });
+    fetch(`http://localhost:3000/posts/${post.id}`, config);
   };
 
   const liked = false;
@@ -76,9 +76,9 @@ const Post = ({
                 to={`/profile/1`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className="name">{post.id}</span>
+                <span className="name">{currentUser.username}</span>
               </Link>
-              <span className="date">{post.created_at.slice()}</span>
+              <span className="date">{post.created_at}</span>
             </div>
           </div>
           <div className="items">

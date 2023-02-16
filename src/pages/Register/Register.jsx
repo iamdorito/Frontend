@@ -1,47 +1,48 @@
 import "./register.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
-  const logins = {
+  const [formData, setFormData] = useState({
+    username: "",
     email: "",
     password: "",
-    password_confirmation: "",
-    registrationErrors: "",
-  };
+  });
+  const { setCurrentUser } = useContext(AuthContext);
 
-  const [form, setForm] = useState(logins);
+  const navigate = useNavigate();
 
-  const { email, username, password } = form;
-
-  const handleSubmit = (e) => {
-    axios
-      .post(
-        "http://localhost:3001/registrations",
-        {
-          user: {
-            email: email,
-            username: username,
-            password: password,
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((resp) => {
-        console.log("registration res", resp);
-      })
-      .catch((err) => {
-        console.log("Registration error", err);
-      });
-
-    e.preventDefault();
-  };
+  const { email, username, password } = formData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    const configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+    e.preventDefault();
+    fetch("http://localhost:3000/users", configObj).then((resp) => {
+      if (resp.ok) {
+        resp.json().then((user) => {
+          setCurrentUser(user);
+        });
+      } else {
+        resp.json().then((errors) => {
+          console.error(errors);
+        });
+      }
+    });
+    navigate("/");
   };
 
   return (
@@ -49,14 +50,6 @@ const Register = () => {
       <div className="register">
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            onChange={handleChange}
-            required
-            value={email}
-          />
           <input
             type="text"
             placeholder="Username"
@@ -66,11 +59,20 @@ const Register = () => {
             value={username}
           />
           <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            required
+            value={email}
+          />
+          <input
             type="password"
             placeholder="Password"
             name="password"
             onChange={handleChange}
             required
+            value={password}
           />
           <button>Sign Up</button>
           <span>

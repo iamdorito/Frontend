@@ -6,14 +6,24 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import { Link } from "react-router-dom";
 
+import { useContext } from "react";
+
+import { AuthContext } from "../../context/AuthContext";
+
 const Leftbar = () => {
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    fetch("http://localhost:3000/logout", { method: "DELETE" });
+  };
   return (
     <div className="leftside">
       <div className="container">
         <div className="menu">
           <div className="user">
             <img src={nfticon} alt="" />
-            <span>Dwayne</span>
+            <span>{currentUser.username}</span>
           </div>
           <div className="item">
             <Link to="/" style={{ color: "white" }}>
@@ -35,7 +45,7 @@ const Leftbar = () => {
             <Link to="/login" style={{ color: "white" }}>
               <ExitToAppOutlinedIcon />
             </Link>
-            <span>Logout</span>
+            <span onClick={handleLogout}>Logout</span>
           </div>
         </div>
       </div>
