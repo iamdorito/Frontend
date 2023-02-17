@@ -13,6 +13,7 @@ const Home = () => {
 
 const HomeStyles = styled.div`
   background-color: black;
+  height: 100%;
 `;
 
 export default Home;

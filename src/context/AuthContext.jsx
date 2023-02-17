@@ -7,26 +7,8 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = (data) => {
-    const configObj = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    fetch("http://localhost:3000/login", configObj).then((resp) => {
-      if (resp.ok) {
-        resp.json().then((user) => {
-          setCurrentUser(user);
-          setIsAuthenticated(true);
-        });
-      } else {
-        resp.json().then((errors) => {
-          console.error(errors);
-        });
-      }
-    });
+  const login = async (data) => {
+    return axios.post("http://localhost:3000/login", data);
   };
 
   const value = {
