@@ -8,6 +8,7 @@ import Posts from "../../components/Posts/Posts";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import styled from "styled-components";
+import defaultUser from "../../assets/default-user.png";
 
 const Profile = () => {
   const { currentUser } = useContext(AuthContext);
@@ -22,15 +23,11 @@ const Profile = () => {
     <ProfileWrapper>
       <ImagesWrapper>
         <img
-          src="https://tse3.mm.bing.net/th?id=OIP.RAISaxyuqz3ZEnMFq_DgRgHaJk&pid=Api&P=0"
+          src="https://experihub.com/wp-content/uploads/2018/07/Cover-photo-default.jpg"
           alt=""
           className="cover"
         />
-        <img
-          src="https://imagesvc.timeincapp.com/v3/fan/image?url=https://pippenainteasy.com/wp-content/uploads/getty-images/2016/04/1130154358.jpeg&c=sc&w=3200&h=2133"
-          alt=""
-          className="profile-pic"
-        />
+        <img src={defaultUser} alt="" className="profile-pic" />
       </ImagesWrapper>
       <ProfileContainer>
         <div className="profile-info">
