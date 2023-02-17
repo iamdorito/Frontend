@@ -1,74 +1,31 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # FlatSocial
-# Social-Media-Project
-# Social-Media-Project
-# Social-Media-Project
+
+## Flatsocial is a social media website that allows users to register an account, post comments and interact with those post and comments. 
+![Gif for ReadMe](https://user-images.githubusercontent.com/114102254/219701023-fb98b3cf-4a4f-40a4-8c25-7f4230fe8870.gif)
+</br>
+</br>
+
+## Purpose of Flatsocial & How to get started
+
+The reason for flatsocial was to create an online space for those attending flatiron. Currently we use slack, but we thought it would be cool to have something more personal to flatiron. In order to use Flatsocail, you will need to fork and clone the frontend and backend. For the backend, you will open VS with `code .`. You will need to run `bundle install` to grab the necesarry gems, then open a terminal in rails and you will type `rails server` to launch the server for the backend. For the frontend you will cd into the frontend and type `npm install`, to install the necesarry components, then npm start to launch the frontend in the browser.
+## Features
+There are a few different features that are available on this app I will go into detail about each feature belowl
+
+### Login/Register
+The first feature you are greeted with as soon as you launch the application. You will be shown a login screen where you will enter a username and password to login. If you do not have an account, you can press the register link, where you will be re-routed to create an account. 
+
+### Home Page
+When you reach the home page, you wil notice a few different things on the page. You will see a menu on the left that will allow you to access your personal profile, a link to your timeline, help and support, and a logout button.  The center of the page at the top contains an a newsfeed and posts of users, and the right side contains users that are new to Flatsocial. Some of these features are self explanitory, so there will be more information for the features mentioned that have more to them below.
+
+### Profile
+The profile link will route you to your profile where you can view your followers, posts and pictures that you've uploaded. You can also follow or unfollow people from here.
+
+### Newsfeed 
+The newsfeed is connected to an online api that keeps it up to date with the lastest trending stories. You can click on each individual story to view increase the size of the story. Check in daily for new news!
+
+### Posts
+The center of the page contains posts that the user will be able to interact with by either creating a post, or by commenting on posts of other users. Users will be able to see the amount of likes and comments on each post. Users will be ble to edit posts and comments as well as delete posts and comments by clicking on either edit or delete on the post.
+
+## Creators and Contributors 
+
+This application was created by Seb, Reese, and Brendan
