@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import Post from "../Post/Post";
-import styled from "styled-components";
 import defaultPic from "../../assets/default-user.png";
 
 import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
+
+import { useState, useEffect, useContext } from "react";
+import Post from "../Post/Post";
+import styled from "styled-components";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -50,7 +51,6 @@ const Posts = () => {
     });
     const post = await response.json();
     AddPost(post);
-    setNewPost("");
   };
 
   return (

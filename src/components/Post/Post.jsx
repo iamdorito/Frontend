@@ -13,6 +13,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { CommentContext } from "../../context/CommentContext";
 
 import styled from "styled-components";
 
@@ -26,8 +27,11 @@ const Post = ({
   const [commentOpen, setCommentOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likedCount, setLikedCount] = useState(0);
 
   const { currentUser } = useContext(AuthContext);
+  const { comments } = useContext(CommentContext);
 
   const handleCommentClick = () => {
     setCommentOpen(!commentOpen);
@@ -39,6 +43,11 @@ const Post = ({
 
   const handleEditMode = () => {
     setIsEditMode(!isEditMode);
+  };
+
+  const handleLiked = () => {
+    setLikedCount(likedCount + 1);
+    setIsLiked(!isLiked);
   };
 
   const handleDeleteClick = async () => {
@@ -77,7 +86,6 @@ const Post = ({
       console.log(error);
     }
   };
-  const liked = false;
 
   // const timestamp = post.created_at;
   // const now = new Date();
@@ -116,13 +124,19 @@ const Post = ({
           <p>{post.desc}</p>
         </Content>
         <Info>
-          <Item>
-            {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-            25 likes
+          <Item onClick={handleLiked}>
+            {isLiked ? (
+              <FavoriteOutlinedIcon />
+            ) : (
+              <FavoriteBorderOutlinedIcon />
+            )}
+            {`${likedCount} Likes`}
           </Item>
           <Item onClick={handleCommentClick}>
             <ForumOutlinedIcon />
-            25 comments
+            {`${comments.length} ${
+              comments.length !== 1 ? "Comments" : "Comment"
+            }`}
           </Item>
           <Item>
             <ShareOutlinedIcon />

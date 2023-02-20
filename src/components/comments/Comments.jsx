@@ -1,40 +1,61 @@
 import defaultPic from "../../assets/default-user.png";
 import styled from "styled-components";
+import { useState, useEffect, useContext } from "react";
+
+import { AuthContext } from "../../context/AuthContext";
+import { CommentContext } from "../../context/CommentContext";
 
 const Comments = () => {
-  // const [comments, setComments] = useState();
+  const [newComment, setNewComments] = useState("");
+  const { currentUser } = useContext(AuthContext);
+  const { comments, setComments } = useContext(CommentContext);
 
-  const comments = [
-    {
-      id: 1,
-      desc: "Yo, I agree but but but but but but but but",
-      name: "Reese Marshal",
-      userId: 1,
-      profilePicture:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 2,
-      desc: "This doesn't make sense! It's not working and I'm always getting an error",
-      name: "Aura Gomez",
-      userId: 2,
-      profilePicture:
-        "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    },
-  ];
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/comments")
+  //     .then((resp) => resp.json())
+  //     .then((comments) => setComments(comments));
+  // }, []);
+
+  const handleInputComment = (e) => {
+    setNewComments(e.target.value);
+  };
+
+  const AddComment = (newComment) => {
+    setComments((comments) => [...comments, newComment]);
+  };
+
+  const handleAddComment = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:3000/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ description: newComment }),
+    });
+    const comment = await response.json();
+    AddComment(comment);
+  };
+
   return (
     <CommentsDiv>
       <WriteDiv>
         <img src={defaultPic} alt="" />
-        <input type="text" placeholder="write a comment" />
-        <button>Send</button>
+        <input
+          type="text"
+          name="comment"
+          placeholder="write a comment"
+          onChange={handleInputComment}
+          required
+        />
+        <button onClick={handleAddComment}>Send</button>
       </WriteDiv>
       {comments.map((comment) => (
         <CommentDiv key={comment.id}>
-          <img src={comment.profilePicture} alt="" />
+          <img src={defaultPic} alt="" />
           <InfoDiv>
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
+            <span>{currentUser.username}</span>
+            <p>{comment.description}</p>
           </InfoDiv>
           <Date>1 hour ago</Date>
         </CommentDiv>
