@@ -1,24 +1,24 @@
-// import { createContext, useState, useEffect } from "react";
-// // import axios from "axios";
+import { createContext, useState, useEffect } from "react";
+// import axios from "axios";
 
-// export const UserContext = createContext();
+export const UserContext = createContext();
 
-// export const UserContextProvider = async ({ children }) => {
-//   const [Users, setUsers] = useState([]);
+export const UserContextProvider = async ({ children }) => {
+  const [Users, setUsers] = useState([]);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const res = await fetch("http://localhost:3000/users");
-//       const data = await res.json();
-//       setUsers(data);
-//     };
-//     fetchData();
-//   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:3000/users");
+      const data = await res.json();
+      setUsers(data);
+    };
+    fetchData();
+  }, []);
 
-//   const value = {
-//     Users,
-//     setUsers,
-//   };
+  const value = {
+    Users,
+    setUsers,
+  };
 
-//   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
-// };
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
